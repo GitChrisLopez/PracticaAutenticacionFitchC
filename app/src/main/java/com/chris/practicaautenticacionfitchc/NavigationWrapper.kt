@@ -7,18 +7,22 @@ import androidx.navigation.compose.composable
 import com.chris.practicaautenticacionfitchc.presentation.initial.InitialScreen
 import com.chris.practicaautenticacionfitchc.presentation.login.LoginScreen
 import com.chris.practicaautenticacionfitchc.presentation.signup.SignUpScreen
+import com.google.firebase.auth.FirebaseAuth
 
 @Composable
-fun NavigationWrapper(navHostController: NavHostController) {
+fun NavigationWrapper(navHostController: NavHostController, auth: FirebaseAuth) {
     NavHost(navController = navHostController, startDestination = "initial") {
         composable("initial"){
-            InitialScreen()
+            InitialScreen(
+                navigateToLogin = {navHostController.navigate("LogIn")},
+                navigateToSignUp = {navHostController.navigate("SignUp")},
+            )
         }
         composable("logIn"){
-            LoginScreen()
+            LoginScreen(auth, navigateToHome = {})
         }
         composable("SignUp"){
-            SignUpScreen()
+            SignUpScreen(auth, navigateToHome = {})
         }
     }
 }

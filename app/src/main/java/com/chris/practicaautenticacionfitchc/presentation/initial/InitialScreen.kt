@@ -3,6 +3,7 @@ package com.chris.practicaautenticacionfitchc.presentation.initial
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -21,16 +22,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.chris.practicaautenticacionfitchc.ui.theme.*
 import com.chris.practicaautenticacionfitchc.R
 
+@Preview
 @Composable
-fun InitialScreen() {
+fun InitialScreen(
+    navigateToLogin: () -> Unit = {},
+    navigateToSignUp: () -> Unit = {}
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -65,7 +72,7 @@ fun InitialScreen() {
         Spacer(modifier = Modifier.weight(1f))
 
         Button(
-            onClick = { },
+            onClick = { navigateToSignUp() },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(48.dp)
@@ -80,16 +87,29 @@ fun InitialScreen() {
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        // This calls the custom button defined below
-        CustomButton()
+        CustomButton(
+            Modifier.clickable { }, painterResource(id = R.drawable.google), "Continue with Google"
+        )
 
         Spacer(modifier = Modifier.height(8.dp))
+
+        CustomButton(
+            Modifier.clickable { }, painterResource(id = R.drawable.facebook), "Continue with Facebook"
+        )
+
+        Text(
+            text = "Log In",
+            color = Color.White,
+            modifier = Modifier.padding(24.dp).clickable{ navigateToLogin() }
+        )
+
+        Spacer(modifier = Modifier.weight(1f))
 
     }
 }
 
 @Composable
-fun CustomButton() {
+fun CustomButton(modifier: Modifier, painter: Painter, title: String) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -100,14 +120,14 @@ fun CustomButton() {
         contentAlignment = Alignment.CenterStart
     ) {
         Image(
-            painter = painterResource(id = R.drawable.google),
+            painter = painter,
             contentDescription = "",
             modifier = Modifier
                 .padding(start = 16.dp)
                 .size(16.dp)
         )
         Text(
-            text = "pepe",
+            text = title,
             color = Color.White,
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Center,
