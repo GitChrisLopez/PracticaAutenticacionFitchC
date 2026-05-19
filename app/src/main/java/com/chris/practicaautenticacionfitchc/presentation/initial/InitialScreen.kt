@@ -3,7 +3,6 @@ package com.chris.practicaautenticacionfitchc.presentation.initial
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -22,7 +21,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -61,6 +59,58 @@ fun InitialScreen() {
             "Free on Spotify",
             color = Color.White,
             fontSize = 38.sp,
+            fontWeight = FontWeight.Bold
+        )
+
+        Spacer(modifier = Modifier.weight(1f))
+
+        Button(
+            onClick = { },
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(48.dp)
+                .padding(horizontal = 32.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = Green)
+        ) {
+            Text(
+                text = "Sign up free",
+                color = Black,
+                fontWeight = FontWeight.Bold)
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // This calls the custom button defined below
+        CustomButton()
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+    }
+}
+
+@Composable
+fun CustomButton() {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(48.dp)
+            .padding(horizontal = 32.dp)
+            .background(BackgroundButton)
+            .border(2.dp, ShapeButton, CircleShape),
+        contentAlignment = Alignment.CenterStart
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.google),
+            contentDescription = "",
+            modifier = Modifier
+                .padding(start = 16.dp)
+                .size(16.dp)
+        )
+        Text(
+            text = "pepe",
+            color = Color.White,
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Center,
             fontWeight = FontWeight.Bold
         )
     }
